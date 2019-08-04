@@ -24,12 +24,12 @@ import (
  *   -d (Organize content by date)
  */
 func main() {
-	inputPtr := flag.String("i", "", "Input Folder Path")
-	outputPtr := flag.String("o", "", "Output Folder Path")
-	atomPtr := flag.Bool("a", false, "Generate Atom file (default: false)")
-	rssPtr := flag.Bool("r", false, "Generate RSS file (default: false)")
-	sitemapPtr := flag.Bool("s", true, "Generate Sitemap.xml file (default: true)")
-	datePtr := flag.Bool("d", true, "Order content by date (default: true)")
+	inputPtr := flag.String("i", "", "[required] Input Folder Path")
+	outputPtr := flag.String("o", "", "[required] Output Folder Path")
+	atomPtr := flag.Bool("a", false, "Generate Atom file")
+	rssPtr := flag.Bool("r", false, "Generate RSS file")
+	sitemapPtr := flag.Bool("s", true, "Generate Sitemap.xml file")
+	datePtr := flag.Bool("d", true, "Order content by date")
 
 	flag.Parse()
 
@@ -131,12 +131,23 @@ func ensurePathIsValidFile(path string) bool {
 	return false
 }
 
-func handleIndexJson() {
-
+func handleIndexJson(indexJsonPath string, inputPath string, outputPath string, articles []Article) {
+	// Read IndexTemplateHtml
+	// Read ElementTemplateHtml
+	// For each article,
+	// 		index the ElementTemplateHtml
+	//		index the IndexTemplateHtml with {{elements}}, and leave a dangling {{elements}}
+	// Remove the occurance of {{elements}}
+	// Save IndexTemplateHtml in outputPath as index.html
 }
 
-func handleStandardJson() {
-
+func handleStandardArticles(articles []Article, inputPath string, outputPath string) {
+	// For each article:
+	// 		Read TemplateHtml
+	// 		Read Markdown & convert to HTML
+	// 		Template MarkdownHtml in TemplateHtml with {{content}}
+	// 		Template TemplateHtml with article
+	// 		Save TemplateHtml as article url
 }
 
 func getJsonFilesFromPath(root string) []string {

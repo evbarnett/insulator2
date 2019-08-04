@@ -9,6 +9,6 @@ type Article struct {
 	Values       map[string]string `json:"values"`
 }
 
-func (article *Article) templateString() string {
+func (article *Article) templateString(data string) string {
 	return "NIL" //TODO
 }
